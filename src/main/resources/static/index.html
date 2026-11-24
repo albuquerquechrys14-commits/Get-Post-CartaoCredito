@@ -1,0 +1,581 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CardSecure | Segurança do seu cartão</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #f4f5fb;
+            color: #20213a;
+        }
+
+        header {
+            background: #17172f;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #a78bfa;
+        }
+
+        .header-info {
+            color: #c4c4d6;
+            font-size: 13px;
+        }
+
+        .hero {
+            background: linear-gradient(120deg, #17172f, #30245c);
+            padding: 75px 8% 100px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-content {
+            max-width: 580px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(167,139,250,0.16);
+            color: #c4b5fd;
+            padding: 9px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: 43px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #a78bfa;
+        }
+
+        .hero p {
+            color: #c5c5d9;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .card {
+            width: 340px;
+            height: 210px;
+            flex-shrink: 0;
+            background: linear-gradient(135deg, #8064e9, #35236e);
+            border-radius: 19px;
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            transform: rotate(5deg);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .chip {
+            width: 43px;
+            height: 33px;
+            background: linear-gradient(135deg, #f6df9c, #b69a52);
+            border-radius: 7px;
+            margin-top: 28px;
+        }
+
+        .card-number {
+            margin-top: 20px;
+            letter-spacing: 3px;
+            font-size: 16px;
+        }
+
+        .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 17px;
+            font-size: 10px;
+            color: #e5dcff;
+        }
+
+        .container {
+            max-width: 1050px;
+            margin: -45px auto 60px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 12px 45px rgba(30,20,80,0.08);
+        }
+
+        .form-title {
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .form-description {
+            color: #77788c;
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin: 30px 0 18px;
+            color: #51418d;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .field label {
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #dedee9;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+            background: #fafaff;
+            color: #25243a;
+        }
+
+        input:focus, select:focus {
+            border-color: #8567e8;
+            box-shadow: 0 0 0 3px rgba(133,103,232,0.12);
+        }
+
+        .security-note {
+            margin-top: 25px;
+            background: #f3efff;
+            border-left: 4px solid #8868eb;
+            padding: 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #62548c;
+            line-height: 1.7;
+        }
+
+        .button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 28px;
+            background: linear-gradient(100deg, #7251d5, #9576f5);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(114,81,213,0.25);
+        }
+
+        #resultado {
+            display: none;
+            margin-top: 25px;
+            padding: 22px;
+            border-radius: 12px;
+            background: #f2efff;
+            border: 1px solid #ddd3ff;
+            line-height: 1.8;
+        }
+
+        #resultado h3 {
+            color: #6448bd;
+            margin-bottom: 10px;
+        }
+
+        .tips {
+            margin-top: 55px;
+        }
+
+        .tips h2 {
+            font-size: 25px;
+            margin-bottom: 25px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .tip {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+        }
+
+        .tip .icon {
+            font-size: 27px;
+            margin-bottom: 15px;
+        }
+
+        .tip h3 {
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+
+        .tip p {
+            font-size: 13px;
+            color: #77788c;
+            line-height: 1.7;
+        }
+
+        footer {
+            background: #17172f;
+            text-align: center;
+            color: #aaa9c1;
+            padding: 28px;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        @media(max-width: 750px) {
+            .hero {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 55px 7% 85px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .card {
+                width: 100%;
+                max-width: 340px;
+                transform: none;
+            }
+
+            .form-card {
+                padding: 25px 20px;
+            }
+
+            .form-grid, .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-info {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">Card<span>Secure.</span></div>
+    <div class="header-info">Educação e proteção financeira</div>
+</header>
+
+<section class="hero">
+
+    <div class="hero-content">
+        <div class="tag">🛡️ SEGURANÇA FINANCEIRA</div>
+
+        <h1>
+            Como saber se seu cartão foi <span>clonado?</span>
+        </h1>
+
+        <p>
+            Descubra os principais sinais de clonagem de cartões,
+            aprenda a identificar movimentações suspeitas e veja
+            como proteger suas informações financeiras.
+        </p>
+    </div>
+
+    <div class="card">
+        <div class="card-top">
+            <span>CARD SECURE</span>
+            <span>◉</span>
+        </div>
+
+        <div class="chip"></div>
+
+        <div class="card-number">
+            •••• &nbsp; •••• &nbsp; •••• &nbsp; 4829
+        </div>
+
+        <div class="card-bottom">
+            <span>CARTÃO DEMONSTRATIVO<br>CLIENTE EXEMPLO</span>
+            <span>VISA</span>
+        </div>
+    </div>
+
+</section>
+
+<main class="container">
+
+    <section class="form-card">
+
+        <h2 class="form-title">Verificação de segurança</h2>
+
+        <p class="form-description">
+            Preencha as informações abaixo para realizar uma
+            análise educativa de possíveis sinais de clonagem.
+        </p>
+
+        <form id="formulario">
+
+            <div class="section-title">01. Informações do cartão</div>
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Nome fictício do titular</label>
+                    <input type="text" id="nome"
+                           placeholder="Ex: João da Silva" required>
+                </div>
+
+                <div class="field">
+                    <label>Bandeira do cartão</label>
+                    <select id="bandeira" required>
+                        <option value="">Selecione</option>
+                        <option>Visa</option>
+                        <option>Mastercard</option>
+                        <option>Elo</option>
+                        <option>American Express</option>
+                        <option>Outra</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Últimos 4 dígitos (fictícios)</label>
+                    <input type="text" id="ultimos"
+                           maxlength="4" inputmode="numeric"
+                           pattern="[0-9]{4}"
+                           placeholder="Ex: 4829" required>
+                </div>
+
+                <div class="field">
+                    <label>O cartão está com você?</label>
+                    <select id="posse" required>
+                        <option value="">Selecione</option>
+                        <option value="sim">Sim</option>
+                        <option value="nao">Não</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="section-title">02. Atividades suspeitas</div>
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label>Você identificou compras desconhecidas?</label>
+                    <select id="compras" required>
+                        <option value="">Selecione</option>
+                        <option value="sim">Sim</option>
+                        <option value="nao">Não</option>
+                        <option value="nao_sei">Não tenho certeza</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label>Recebeu notificações de compras suspeitas?</label>
+                    <select id="notificacoes" required>
+                        <option value="">Selecione</option>
+                        <option value="sim">Sim</option>
+                        <option value="nao">Não</option>
+                        <option value="nao_sei">Não tenho certeza</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="security-note">
+                🔒 <strong>Privacidade:</strong> utilize somente
+                informações fictícias neste projeto. Nunca informe
+                o número completo do cartão, senha, CVV ou dados
+                bancários reais. Os dados deste formulário são
+                analisados apenas nesta página e não são enviados
+                ao servidor.
+            </div>
+
+            <button type="submit" class="button">
+                Analisar possíveis riscos →
+            </button>
+
+        </form>
+
+        <div id="resultado" role="status" aria-live="polite">
+        </div>
+
+    </section>
+
+    <section class="tips">
+
+        <h2>Como identificar uma possível clonagem?</h2>
+
+        <div class="tips-grid">
+
+            <div class="tip">
+                <div class="icon">💳</div>
+                <h3>Compras desconhecidas</h3>
+                <p>
+                    Verifique se existem compras no extrato
+                    que você não reconhece.
+                </p>
+            </div>
+
+            <div class="tip">
+                <div class="icon">📱</div>
+                <h3>Notificações suspeitas</h3>
+                <p>
+                    Fique atento a alertas de compras ou
+                    tentativas de pagamento que você não realizou.
+                </p>
+            </div>
+
+            <div class="tip">
+                <div class="icon">🔐</div>
+                <h3>Proteja seus dados</h3>
+                <p>
+                    Nunca compartilhe senhas, códigos de
+                    segurança ou informações completas do cartão.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>CardSecure © 2026 — Projeto acadêmico educativo.</p>
+    <p>Este sistema não realiza autenticação bancária nem detecta clonagem.</p>
+</footer>
+
+<script>
+
+    document.getElementById("formulario").addEventListener("submit",
+        function(event) {
+
+            event.preventDefault();
+
+            const nome = document.getElementById("nome").value;
+            const compras = document.getElementById("compras").value;
+            const notificacoes = document.getElementById("notificacoes").value;
+            const posse = document.getElementById("posse").value;
+
+            let pontos = 0;
+
+            if (compras === "sim") pontos += 2;
+            if (notificacoes === "sim") pontos += 1;
+            if (posse === "nao") pontos += 1;
+
+            let titulo;
+            let mensagem;
+
+            if (pontos >= 2) {
+                titulo = "⚠️ Atenção: sinais suspeitos identificados";
+
+                mensagem = `
+                    <p>Olá, ${nome}!</p>
+                    <p>Suas respostas indicaram situações que merecem atenção.</p>
+                    <p>Recomendamos que você:</p>
+                    <ul>
+                        <li>Entre em contato imediatamente com seu banco.</li>
+                        <li>Bloqueie temporariamente o cartão, se necessário.</li>
+                        <li>Conteste compras que não reconhece.</li>
+                        <li>Verifique seu extrato bancário.</li>
+                    </ul>
+                `;
+
+            } else {
+                titulo = "✓ Nenhum sinal relevante identificado";
+
+                mensagem = `
+                    <p>Olá, ${nome}!</p>
+                    <p>Com base nas respostas fornecidas,
+                    não foram identificados sinais relevantes
+                    nesta análise educativa.</p>
+                    <p>Continue acompanhando seu extrato e
+                    mantenha seus dados protegidos.</p>
+                `;
+            }
+
+            const resultado = document.getElementById("resultado");
+
+            resultado.innerHTML = `
+                <h3>${titulo}</h3>
+                ${mensagem}
+                <br>
+                <small>
+                    Esta análise é apenas educativa.
+                    Não confirma nem descarta uma clonagem real.
+                </small>
+            `;
+
+            resultado.style.display = "block";
+
+            resultado.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        });
+
+</script>
+
+</body>
+</html>
